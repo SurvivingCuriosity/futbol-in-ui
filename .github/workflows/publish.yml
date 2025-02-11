@@ -1,0 +1,41 @@
+name: Build and Publish Package
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Clonar el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Configurar Node.js (ajusta la versión según tus necesidades)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'              # O la versión LTS que prefieras
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      # 3. Instalar dependencias
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Ejecutar el build de la aplicación o librería
+      - name: Build project
+        run: npm run build
+
+      # 5. Ejecutar tests (opcional, pero recomendado)
+      - name: Run tests
+        run: npm test
+
+      # 6. Publicar el paquete en npm
+      - name: Publish package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
