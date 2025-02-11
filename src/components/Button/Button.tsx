@@ -1,3 +1,5 @@
+"use client"
+
 import spinner from '../../assets/svg/bouncing-circles.svg'
 import { cn } from "../../utils/cn";
 import { ButtonSize, ButtonVariant } from "./types";
