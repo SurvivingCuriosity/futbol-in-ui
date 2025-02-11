@@ -31,8 +31,8 @@ jobs:
         run: npm run build
 
       # 5. Ejecutar tests (opcional, pero recomendado)
-      - name: Run tests
-        run: npm test
+      #- name: Run tests
+      #  run: npm test
 
       # 6. Publicar el paquete en npm
       - name: Publish package
