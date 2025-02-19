@@ -30,8 +30,8 @@ export const Button = (props: ButtonProps) => {
   };
 
   const variantClasses: Record<ButtonVariant, string> = {
-    primary: "bg-lime-300 text-black",
-    outline: "bg-transparent text-lime-300 border border-lime-300",
+    primary: "bg-primary text-black",
+    outline: "bg-transparent text-primary border border-primary",
     neutral: "bg-neutral-500 text-white",
     "neutral-outline":
       "bg-transparent text-neutral-500 border border-neutral-500",

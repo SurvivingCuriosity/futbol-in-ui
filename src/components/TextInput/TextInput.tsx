@@ -18,7 +18,7 @@ export const TextInput = (props: TextInputProps) => {
     : "";
 
   const baseClasses =
-    "border border-neutral-500 rounded-lg focus:outline-lime-300";
+    "border border-neutral-500 rounded-lg focus:outline-primary";
 
   const disabledClasses = disabled
     ? "bg-neutral-200 text-neutral-300 cursor-not-allowed placeholder:text-neutral-400"
