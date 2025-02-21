@@ -4,14 +4,16 @@ import { cn } from "../../utils/cn";
 import { BaseInput } from "../BaseInput";
 
 export interface TextInputProps {
+  value?: string;
   placeholder?: string;
   disabled?: boolean;
   onChangeText?: (text: string) => void;
   errorText?: string;
+  successText?: string;
 }
 
 export const TextInput = (props: TextInputProps) => {
-  const { placeholder, disabled, onChangeText, errorText = "" } = props;
+  const { value, placeholder, disabled, onChangeText, errorText = "", successText = "" } = props;
 
   const errorClasses = errorText
     ? "border border-red-500 text-red-500 placeholder-red-500 focus:outline-red-500"
@@ -29,12 +31,14 @@ export const TextInput = (props: TextInputProps) => {
   return (
     <>
       <BaseInput
+        value={value}
         className={classes}
         placeholder={placeholder}
         disabled={disabled}
         onChange={(e) => onChangeText && onChangeText(e.target.value)}
       />
       {errorText && <small className="text-red-500 text-xs block px-1">{errorText}</small>}
+      {successText && <small className="text-green-500 text-xs block px-1">{successText}</small>}
     </>
   );
 };
