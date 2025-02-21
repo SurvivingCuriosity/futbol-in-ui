@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import spinner from '../../assets/svg/bouncing-circles.svg'
+import spinner from "../../assets/svg/bouncing-circles.svg";
 import { cn } from "../../utils/cn";
 import { ButtonSize, ButtonVariant } from "./types";
 
@@ -23,6 +23,8 @@ export const Button = (props: ButtonProps) => {
     disabled = false,
   } = props;
 
+  const baseClasses = "rounded-lg hover:brightness-90 w-full";
+
   const sizeClasses: Record<ButtonSize, string> = {
     sm: "px-2 py-1 text-sm h-8",
     md: "px-4 py-2 text-base h-10",
@@ -38,12 +40,9 @@ export const Button = (props: ButtonProps) => {
     danger: "bg-red-500 text-white",
   };
 
-  const baseClasses = "rounded-lg hover:brightness-90";
-
   const disabledClasses = disabled
     ? "bg-neutral-300 text-neutral-400 cursor-not-allowed"
     : "cursor-pointer";
-
 
   const classes = cn(
     baseClasses,
@@ -62,7 +61,7 @@ export const Button = (props: ButtonProps) => {
       disabled={disabled || loading}
     >
       {loading ? (
-        <img src={spinner} alt="Loading..." className="w-6 h-6" />
+        <img src={spinner} alt="Loading..." className="w-6 h-6 mx-auto" />
       ) : (
         label
       )}
