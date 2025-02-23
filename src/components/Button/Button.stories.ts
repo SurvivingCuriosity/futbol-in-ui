@@ -66,6 +66,12 @@ export const Danger: Story = {
   },
 };
 
+export const DangerOutline: Story = {
+  args: {
+    variant: 'danger-outline',
+  },
+};
+
 export const Loading: Story = {
   args: {
     loading: true,

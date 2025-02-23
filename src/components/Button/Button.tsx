@@ -38,6 +38,7 @@ export const Button = (props: ButtonProps) => {
     "neutral-outline":
       "bg-transparent text-neutral-500 border border-neutral-500",
     danger: "bg-red-500 text-white",
+    "danger-outline": "bg-transparent text-red-500 border border-red-500",
   };
 
   const disabledClasses = disabled
