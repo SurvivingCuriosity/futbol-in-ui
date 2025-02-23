@@ -8,6 +8,7 @@ interface OptionType {
 }
 
 export interface AsyncSelectProps<T extends OptionType> {
+  value?: T;
   onSelect: (selectedOption: T) => void;
   loadOptions: (inputValue: string) => Promise<T[]> | T[];
   disabled?: boolean;
@@ -20,6 +21,7 @@ export function CustomAsyncSelect<T extends OptionType>(
   props: AsyncSelectProps<T>
 ) {
   const {
+    value,
     onSelect,
     loadOptions,
     disabled = false,
@@ -49,6 +51,7 @@ export function CustomAsyncSelect<T extends OptionType>(
 
   return (
     <AsyncSelect<T>
+      value={value}
       placeholder={placeholder}
       loadOptions={loadOptionsWrapper}
       onChange={handleSelect}

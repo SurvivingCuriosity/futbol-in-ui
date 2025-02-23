@@ -9,6 +9,7 @@ export interface OptionType {
 }
 
 export interface CustomSelectProps<T extends OptionType> {
+  value?: T;
   onSelect: (selectedOption: T) => void;
   options: T[];
   disabled?: boolean;
@@ -21,6 +22,7 @@ export function CustomSelect<T extends OptionType>(
   props: CustomSelectProps<T>
 ): React.JSX.Element {
   const {
+    value,
     onSelect,
     options,
     disabled = false,
@@ -37,6 +39,7 @@ export function CustomSelect<T extends OptionType>(
 
   return (
     <Select<T, false, GroupBase<T>>
+      value={value}
       placeholder={placeholder}
       options={options}
       onChange={handleSelect}
