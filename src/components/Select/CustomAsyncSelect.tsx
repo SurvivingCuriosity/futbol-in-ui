@@ -1,6 +1,7 @@
-import { GroupBase, OptionsOrGroups } from "react-select";
+import { useEffect, useMemo } from "react";
 import AsyncSelect from "react-select/async";
 import { sharedSelectStyles } from "./sharedStyles";
+import { debounce } from "../../utils/debounce";
 
 interface OptionType {
   value: string;
@@ -15,11 +16,10 @@ export interface AsyncSelectProps<T extends OptionType> {
   placeholder?: string;
   noOptionsMessage?: string;
   loadingMessage?: string;
+  debounceDelay?: number;
 }
 
-export function CustomAsyncSelect<T extends OptionType>(
-  props: AsyncSelectProps<T>
-) {
+export function CustomAsyncSelect<T extends OptionType>(props: AsyncSelectProps<T>) {
   const {
     value,
     onSelect,
@@ -28,6 +28,7 @@ export function CustomAsyncSelect<T extends OptionType>(
     placeholder = "Escribe para buscar",
     noOptionsMessage = "Sin resultados",
     loadingMessage = "Cargando...",
+    debounceDelay = 400, // Valor por defecto 400ms
   } = props;
 
   const handleSelect = (selectedOption: T | null) => {
@@ -36,24 +37,38 @@ export function CustomAsyncSelect<T extends OptionType>(
     }
   };
 
-  // Wrapper para adaptar la firma de loadOptions
-  const loadOptionsWrapper = (
-    inputValue: string,
-    callback: (options: OptionsOrGroups<T, GroupBase<T>>) => void
-  ) => {
-    const result = loadOptions(inputValue);
-    if (result instanceof Promise) {
-      result.then((options) => callback(options));
-    } else {
-      callback(result);
-    }
-  };
+  // Usamos useMemo para crear la función debounced que solo se recalcula cuando loadOptions o debounceDelay cambian
+  const debouncedLoadOptions = useMemo(
+    () =>
+      debounce(
+        (
+          inputValue: string,
+          callback: (options: import("react-select").OptionsOrGroups<T, import("react-select").GroupBase<T>>) => void
+        ) => {
+          const result = loadOptions(inputValue);
+          if (result instanceof Promise) {
+            result.then((options) => callback(options));
+          } else {
+            callback(result);
+          }
+        },
+        debounceDelay
+      ),
+    [loadOptions, debounceDelay]
+  );
+
+  // Cancelamos el timer al desmontar el componente
+  useEffect(() => {
+    return () => {
+      debouncedLoadOptions.cancel();
+    };
+  }, [debouncedLoadOptions]);
 
   return (
     <AsyncSelect<T>
       value={value}
       placeholder={placeholder}
-      loadOptions={loadOptionsWrapper}
+      loadOptions={debouncedLoadOptions}
       onChange={handleSelect}
       isDisabled={disabled}
       styles={sharedSelectStyles}
