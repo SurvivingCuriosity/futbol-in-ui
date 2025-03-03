@@ -12,9 +12,7 @@ export const sharedSelectStyles = {
       : "var(--color-neutral-950)",
     border: "1px solid var(--color-neutral-700)",
     boxShadow: "none",
-    "&:hover": {
-      borderColor: "transparent",
-    },
+    borderRadius: "10px",
   }),
 
   input: (provided: CSSObjectWithLabel) => ({
