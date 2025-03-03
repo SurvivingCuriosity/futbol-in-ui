@@ -20,11 +20,11 @@ export const TextInput = (props: TextInputProps) => {
     : "";
 
   const baseClasses =
-    "border border-neutral-500 rounded-lg focus:outline-primary";
+    "border border-neutral-500 cursor-text rounded-lg focus:outline-primary";
 
   const disabledClasses = disabled
-    ? "bg-neutral-200 text-neutral-300 cursor-not-allowed placeholder:text-neutral-400"
-    : "cursor-pointer";
+    ? "bg-neutral-300 text-neutral-300 cursor-not-allowed placeholder:text-neutral-400 text-neutral-500"
+    : "cursor-text";
 
   const classes = cn(baseClasses, errorClasses, disabledClasses);
 
