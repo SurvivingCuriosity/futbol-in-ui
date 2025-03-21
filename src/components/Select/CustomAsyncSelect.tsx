@@ -4,14 +4,14 @@ import { sharedSelectStyles } from "./sharedStyles";
 import { debounce } from "../../utils/debounce";
 
 interface OptionType {
-  value: string;
+  value: string|number;
   label: string;
 }
 
 export interface AsyncSelectProps<T extends OptionType> {
   value?: T;
   onSelect: (selectedOption: T) => void;
-  loadOptions: (inputValue: string) => Promise<T[]> | T[];
+  loadOptions: (inputValue: string|number) => Promise<T[]> | T[];
   disabled?: boolean;
   placeholder?: string;
   noOptionsMessage?: string;

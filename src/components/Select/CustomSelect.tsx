@@ -4,7 +4,7 @@ import { GroupBase } from "react-select";
 import { sharedSelectStyles } from "./sharedStyles";
 
 export interface OptionType {
-  value: string;
+  value: string|number;
   label: string;
 }
 
