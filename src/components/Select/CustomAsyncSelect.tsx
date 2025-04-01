@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useMemo } from "react";
 import AsyncSelect from "react-select/async";
 import { sharedSelectStyles } from "./sharedStyles";
