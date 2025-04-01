@@ -22,7 +22,7 @@ export const InlinePicker = (props: InlinePickerProps) => {
   const tabWidth = 100 / options.length;
 
   return (
-    <nav className="block w-full lg:hidden">
+    <nav className="block w-full">
       <div className="mx-auto max-w-[450px] rounded-xl bg-neutral-900 p-1">
         <ul className="relative flex flex-row justify-between">
           <li
