@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { InlinePickerItem } from "./components/InlinePickerItem.tsx";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { InlinePickerSize } from "./types.ts";
 
 export interface InlinePickerProps {
   options: Array<{ id: number; label: string, icon?:IconDefinition }>;
   activeTabId?: number;
   onTabClick: (id: number) => void;
+  size: InlinePickerSize
 }
 
 export const InlinePicker = (props: InlinePickerProps) => {
-  const { options, activeTabId, onTabClick } = props;
+  const { options, activeTabId, onTabClick, size } = props;
 
   const [idSelected, setIdSelected] = useState(activeTabId || options[0].id);
 
@@ -41,6 +43,7 @@ export const InlinePicker = (props: InlinePickerProps) => {
               onClick={handleSelectTab}
               active={idSelected === option.id}
               icon={option.icon}
+              size={size}
             />
           ))}
         </ul>
