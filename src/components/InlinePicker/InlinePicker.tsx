@@ -2,16 +2,30 @@ import { useState } from "react";
 import { InlinePickerItem } from "./components/InlinePickerItem.tsx";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { InlinePickerSize } from "./types.ts";
+import { cn } from "../../utils/cn.ts";
 
 export interface InlinePickerProps {
-  options: Array<{ id: number; label: string, icon?:IconDefinition }>;
+  options: Array<{ id: number; label: string; icon?: IconDefinition }>;
   activeTabId?: number;
   onTabClick: (id: number) => void;
-  size: InlinePickerSize
+  size: InlinePickerSize;
+  containerClassName?: string;
+  itemContainerClassName?: string;
+  iconClassName?: string;
+  textClassName?: string;
 }
 
 export const InlinePicker = (props: InlinePickerProps) => {
-  const { options, activeTabId, onTabClick, size } = props;
+  const {
+    options,
+    activeTabId,
+    onTabClick,
+    size,
+    containerClassName = "",
+    itemContainerClassName = "",
+    iconClassName = "",
+    textClassName = "",
+  } = props;
 
   const [idSelected, setIdSelected] = useState(activeTabId || options[0].id);
 
@@ -25,7 +39,12 @@ export const InlinePicker = (props: InlinePickerProps) => {
 
   return (
     <nav className="block w-full">
-      <div className="mx-auto max-w-[450px] rounded-xl bg-neutral-900 p-1">
+      <div
+        className={cn(
+          `mx-auto rounded-xl bg-neutral-900 p-1`,
+          containerClassName
+        )}
+      >
         <ul className="relative flex flex-row justify-between">
           <li
             className="absolute h-full cursor-pointer rounded-lg bg-neutral-500/20 px-2 text-center transition-transform duration-300 ease-in-out"
@@ -44,6 +63,9 @@ export const InlinePicker = (props: InlinePickerProps) => {
               active={idSelected === option.id}
               icon={option.icon}
               size={size}
+              itemContainerClassName={itemContainerClassName}
+              iconClassName={iconClassName}
+              textClassName={textClassName}
             />
           ))}
         </ul>
