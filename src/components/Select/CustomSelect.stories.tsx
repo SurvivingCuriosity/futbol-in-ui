@@ -12,9 +12,9 @@ const meta: Meta<typeof CustomSelect> = {
   tags: ['autodocs'],
   args: {
     options: [
-      { value: '1', label: 'Opción 1' },
-      { value: '2', label: 'Opción 2' },
-      { value: '3', label: 'Opción 3' },
+      { value: '1', label: 'Opción 1', imageUrl: '/logos/infinity.png' },
+      { value: '2', label: 'Opción 2', imageUrl: '/logos/infinity.png' },
+      { value: '3', label: 'Opción 3', imageUrl: '/logos/infinity.png' },
     ],
     onSelect: action('selected'),
     disabled: false,

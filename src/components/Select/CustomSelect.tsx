@@ -1,13 +1,13 @@
 "use client"
 
 import React from "react";
-import Select from "react-select";
-import { GroupBase } from "react-select";
+import Select, { GroupBase } from "react-select";
 import { sharedSelectStyles } from "./sharedStyles";
 
 export interface OptionType {
   value: string|number;
   label: string;
+  imageUrl?: string;
 }
 
 export interface CustomSelectProps<T extends OptionType> {
@@ -39,6 +39,23 @@ export function CustomSelect<T extends OptionType>(
     }
   };
 
+  function formatOptionLabel<T extends OptionType>(
+    option: T,
+  ) {
+    return (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        {option.imageUrl && (
+          <img
+            src={option.imageUrl}
+            alt={option.label}
+            style={{ width: 20, height: 20, marginRight: 8 }}
+          />
+        )}
+        <span>{option.label}</span>
+      </div>
+    );
+  }
+
   return (
     <Select<T, false, GroupBase<T>>
       value={value}
@@ -51,6 +68,7 @@ export function CustomSelect<T extends OptionType>(
       isClearable={false}
       noOptionsMessage={() => noOptionsMessage}
       loadingMessage={() => loadingMessage}
+      formatOptionLabel={formatOptionLabel}
     />
   );
 }
