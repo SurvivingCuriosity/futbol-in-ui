@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { cn } from "../../utils/cn";
 import { BaseInput } from "../BaseInput";
@@ -10,10 +10,19 @@ export interface TextInputProps {
   onChangeText?: (text: string) => void;
   errorText?: string;
   successText?: string;
+  className?: string;
 }
 
 export const TextInput = (props: TextInputProps) => {
-  const { value, placeholder, disabled, onChangeText, errorText = "", successText = "" } = props;
+  const {
+    value,
+    placeholder,
+    disabled,
+    onChangeText,
+    errorText = "",
+    successText = "",
+    className = "",
+  } = props;
 
   const errorClasses = errorText
     ? "border border-red-500 text-red-500 placeholder-red-500 focus:outline-red-500"
@@ -26,7 +35,7 @@ export const TextInput = (props: TextInputProps) => {
     ? "bg-neutral-300 text-neutral-300 cursor-not-allowed placeholder:text-neutral-400 text-neutral-500"
     : "cursor-text";
 
-  const classes = cn(baseClasses, errorClasses, disabledClasses);
+  const classes = cn(baseClasses, errorClasses, disabledClasses, className);
 
   return (
     <>
@@ -37,8 +46,14 @@ export const TextInput = (props: TextInputProps) => {
         disabled={disabled}
         onChange={(e) => onChangeText && onChangeText(e.target.value)}
       />
-      {errorText && <small className="text-red-500 text-xs block px-1">{errorText}</small>}
-      {successText && <small className="text-green-500 text-xs block px-1">{successText}</small>}
+      {errorText && (
+        <small className="text-red-500 text-xs block px-1">{errorText}</small>
+      )}
+      {successText && (
+        <small className="text-green-500 text-xs block px-1">
+          {successText}
+        </small>
+      )}
     </>
   );
 };
