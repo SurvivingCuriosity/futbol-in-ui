@@ -11,7 +11,7 @@ export interface BaseInputProps
 export const BaseInput = (props: BaseInputProps) => {
   const { className, size = "md", ...rest } = props;
 
-  const baseClasses = "w-full";
+  const baseClasses = "w-full focus:border-primary outline-none";
 
   const sizeClasses: Record<InputSize, string> = {
     sm: "px-2 py-1 text-sm h-8",
