@@ -30,7 +30,7 @@ export function CustomAsyncSelect<T extends OptionType>(props: AsyncSelectProps<
     placeholder = "Escribe para buscar",
     noOptionsMessage = "Sin resultados",
     loadingMessage = "Cargando...",
-    debounceDelay = 400, // Valor por defecto 400ms
+    debounceDelay = 250,
   } = props;
 
   const handleSelect = (selectedOption: T | null) => {

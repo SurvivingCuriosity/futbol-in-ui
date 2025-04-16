@@ -18,6 +18,7 @@ export interface CustomSelectProps<T extends OptionType> {
   placeholder?: string;
   noOptionsMessage?: string;
   loadingMessage?: string;
+  searchable?:boolean;
 }
 
 export function CustomSelect<T extends OptionType>(
@@ -31,6 +32,7 @@ export function CustomSelect<T extends OptionType>(
     placeholder = "Escribe para buscar",
     noOptionsMessage = "Sin resultados",
     loadingMessage = "Cargando...",
+    searchable = false
   } = props;
 
   const handleSelect = (selectedOption: T | null) => {
@@ -64,7 +66,7 @@ export function CustomSelect<T extends OptionType>(
       onChange={handleSelect}
       isDisabled={disabled}
       styles={sharedSelectStyles}
-      isSearchable={true}
+      isSearchable={searchable}
       isClearable={false}
       noOptionsMessage={() => noOptionsMessage}
       loadingMessage={() => loadingMessage}
